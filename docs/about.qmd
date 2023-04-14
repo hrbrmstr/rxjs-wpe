@@ -2,4 +2,4 @@
 title: "About"
 ---
 
-The companion to [the Drop]().
+The companion to [the Drop](https://dailyfinds.hrbrmstr.dev/p/drop-241-2023-04-14-weekend-project).

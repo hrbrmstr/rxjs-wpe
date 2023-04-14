@@ -1,5 +1,7 @@
 # A Small, Doable RxJS Weekend Project
 
+Welcome [Daily Drop readers](https://dailyfinds.hrbrmstr.dev/p/drop-241-2023-04-14-weekend-project)!
+
 You're going to see a small RxJS app that warps you to a new solar system after a user presses a button.
 
 - Part 1 is a fully working app you'll just read through.
@@ -8,4 +10,4 @@ You're going to see a small RxJS app that warps you to a new solar system after 
 
 YOU DO NOT NEED A BUILD SYSTEM. Just a web server, which we provide links to in the workbook.
 
-I'm warping you once more [to the GH Pages doc](https://hrbrmstr.github.io/rxjs-wpe/_site/index.html) for this to explain more, since there are too many limits to the GH READMEs.
+I'm warping you once more [to the GH Pages doc](https://rud.is/rxjs-wpe/docs/) for this to explain more, since there are too many limits to the GH READMEs.
