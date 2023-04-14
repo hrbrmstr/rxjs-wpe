@@ -18,9 +18,7 @@ buttonClickObservable.subscribe(event => {
 const planetNamesSubject = new BehaviorSubject([]);
 const planetNamesObservable = planetNamesSubject.asObservable();
 planetNamesObservable.subscribe(planets => {
-	button.disabled = true;
 	updateList(list, planets);
-	updateOrbits(system, planets, button);
 });
 
 // start the warping!

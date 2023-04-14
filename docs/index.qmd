@@ -8,7 +8,7 @@ output: "docs"
 
 Head [over here](https://github.com/hrbrmstr/rxjs-wpe/tree/batman/01-simple-reactivity) to see the code.
 
-Head [over here]() to see it in action.
+![](basic.png)
 
 It's a simple button and list of planets that gets randomly generated thanks to [this NPM library](https://www.npmjs.com/package/celestial-moniker-generator).
 
@@ -71,3 +71,29 @@ planetNamesSubject.next(newPlanetNames)
 For this part of the mission, just get it running. You can use [one of the servers we've mentioned in a previous Drop](https://dailyfinds.hrbrmstr.dev/p/drop-145-2022-11-29-http-right-now), just deploy to GH Pages, or use your usual.
 
 ## Part 2
+
+The second part of your mission is to not be a monster and break apart the JS code from the `index.html` into a structure like this:
+
+```
+├── index.html
+├── list.js
+├── main.js
+└── styles.css
+```
+
+That means figuring out what goes into `main.js`, what should go in `list.js`, and adding a script call out to `main.js` from `index.html`. 
+
+I highly suggest attempting this on your own, first. But [there's a pre-built solution for you](https://github.com/hrbrmstr/rxjs-wpe/tree/batman/02-get-organized), too.
+
+Feel empowered to stop here and start playing with your own ideas. The next bit has some D3 in it that you aren't writing, but you have to look at, and that causes some cognitive overload in some folks.
+
+## Part 3
+
+This builds on part two, so "everything in a separate, organized files".
+
+![](screenshot.png)
+
+
+
+
+Link to [finished solution](https://github.com/hrbrmstr/rxjs-wpe/tree/batman/03-finished-solution).

@@ -143,6 +143,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#part-1-everything-in-one-place" id="toc-part-1-everything-in-one-place" class="nav-link active" data-scroll-target="#part-1-everything-in-one-place">Part 1: Everything In One Place</a></li>
   <li><a href="#part-2" id="toc-part-2" class="nav-link" data-scroll-target="#part-2">Part 2</a></li>
+  <li><a href="#part-3" id="toc-part-3" class="nav-link" data-scroll-target="#part-3">Part 3</a></li>
   </ul>
 </nav>
     </div>
@@ -169,7 +170,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="part-1-everything-in-one-place" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-everything-in-one-place">Part 1: Everything In One Place</h2>
 <p>Head <a href="https://github.com/hrbrmstr/rxjs-wpe/tree/batman/01-simple-reactivity">over here</a> to see the code.</p>
-<p>Head <a href="">over here</a> to see it in action.</p>
+<p><img src="basic.png" class="img-fluid"></p>
 <p>It’s a simple button and list of planets that gets randomly generated thanks to <a href="https://www.npmjs.com/package/celestial-moniker-generator">this NPM library</a>.</p>
 <p>All of the HTML and JS is on one page to make it easier to grok in an editor, and this is the core functionality:</p>
 <p>A random number generator for the # of planets in the list:</p>
@@ -210,6 +211,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="part-2" class="level2">
 <h2 class="anchored" data-anchor-id="part-2">Part 2</h2>
+<p>The second part of your mission is to not be a monster and break apart the JS code from the <code>index.html</code> into a structure like this:</p>
+<pre><code>├── index.html
+├── list.js
+├── main.js
+└── styles.css</code></pre>
+<p>That means figuring out what goes into <code>main.js</code>, what should go in <code>list.js</code>, and adding a script call out to <code>main.js</code> from <code>index.html</code>.</p>
+<p>I highly suggest attempting this on your own, first. But <a href="https://github.com/hrbrmstr/rxjs-wpe/tree/batman/02-get-organized">there’s a pre-built solution for you</a>, too.</p>
+<p>Feel empowered to stop here and start playing with your own ideas. The next bit has some D3 in it that you aren’t writing, but you have to look at, and that causes some cognitive overload in some folks.</p>
+</section>
+<section id="part-3" class="level2">
+<h2 class="anchored" data-anchor-id="part-3">Part 3</h2>
+<p>This builds on part two, so “everything in a separate, organized files”.</p>
+<p><img src="screenshot.png" class="img-fluid"></p>
+<p>Link to <a href="https://github.com/hrbrmstr/rxjs-wpe/tree/batman/03-finished-solution">finished solution</a>.</p>
 
 
 </section>
