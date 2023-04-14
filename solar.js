@@ -1,6 +1,6 @@
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
-function randomizePlanetPositions(orbits, seed = 0.42) {
+export function randomizePlanetPositions(orbits, seed = 0.42) {
 	const randomPositions = [];
 
 	const sampleOne = d3.randomUniform.source(d3.randomLcg(seed));
@@ -44,14 +44,10 @@ export function solarSystemPlot(
 		minSpeed = 2,
 		maxSpeed = 4,
 		margin = { top: 50, right: 80, bottom: 50, left: 50 },
-		nudge = { x: 0.3, y: -0.25 },
-		font = {
-			family: "Inter",
-			size: "14px",
-			weight: "700"
-		}
+		nudge = { x: 0.3, y: -0.25 }
 	} = {}
 ) {
+	
 	let planetPositions = randomizePlanetPositions(orbits, seed);
 
 	const maxRadius = d3.max(orbits.map((d) => d.radius));
@@ -66,7 +62,7 @@ export function solarSystemPlot(
 		.domain([ -maxRadius, maxRadius ])
 		.range([ -height / 2, height / 2 ]);
 
- document.querySelector(selector).innerHTML = "";
+  document.querySelector(selector).innerHTML = "";
 
 	const domSvg = d3.select(selector)
 
