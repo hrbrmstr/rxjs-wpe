@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="color-scheme" content="dark light">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		html,body,* {
+			font-family: sans-serif;
+		}
+		.orbit {
+			fill: none;
+			stroke: gray;
+			stroke-width: 0.5px;
+			stroke-dasharray: 1;
+		}
+		.planet {
+			fill: #730517;
+			fill-opacity: 0.75;
+			stroke-width: 1px;
+			stroke: #f44560;
+		}
+		.planet-label{
+			font-family: Inter;
+			font-weight: 300;
+			font-size: 9px;
+			text-anchor: middle;
+			alignment-baseline: middle;
+			fill: white;
+		}
+		.container {
+			display: flex;
+			flex-direction: row;
+		}
+		
+		.left {
+			flex-basis: 20%;
+		}
+		
+		.right {
+			flex: 1;
+		}
+	</style>
+	<script type="module">
+		
+		import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+		import { LitElement, html, css } from 'https://cdn.jsdelivr.net/npm/lit@2.7.0/+esm'
+		import { Observable, BehaviorSubject, fromEvent } from 'https://cdn.jsdelivr.net/npm/rxjs@7.8.0/+esm'
+		import { generate_celestial_monikers } from "https://unpkg.com/celestial-moniker-generator/src/index.js"
+		
+		import { solarSystemPlot, generateOrbits } from "./solar.js"
+		
+		globalThis.d3 = d3 // handy
+		
+		const randomNumber = d3.randomInt(1, 20)
+		
+		// create a BehaviorSubject to wrap the planet names array
+		const planetNamesSubject = new BehaviorSubject([]);
+		
+		// select the unordered list element using D3
+		const list = d3.select('#the-list');
+		
+		function updateList(planets) {
+			const items = list.selectAll('li')
+			.data(planets);
+			
+			items.enter().append('li')
+			.text(d => d)
+			.merge(items)
+			.text(d => d);
+			
+			items.exit().remove();
+		}
+		
+		// create an Observable that emits a click event whenever the button is clicked
+		const button = document.querySelector('#the-button');
+		const buttonClickObservable = fromEvent(button, 'click');
+		
+		// subscribe to the button click Observable and update the array of planet names
+		buttonClickObservable.subscribe(event => {
+			const newPlanetNames = generate_celestial_monikers(randomNumber())
+			planetNamesSubject.next(newPlanetNames);
+		});
+		
+		// create an Observable that emits the new planet names array
+		const planetNamesObservable = planetNamesSubject.asObservable();
+		
+		// subscribe to the Observable and update the list contents
+		planetNamesObservable.subscribe(planets => {
+			updateList(planets);
+			const orbits = generateOrbits(planets)
+			solarSystemPlot(orbits, "#the-orbits", { animate: true, simulate: false, nudge: {x: 0, y: 0} })
+		});	
+		
+		const newPlanetNames = generate_celestial_monikers(randomNumber())
+		planetNamesSubject.next(newPlanetNames)
+		
+	</script>
+</head>
+<body>
+	<div class="container">
+		<div class="left">
+			<button id="the-button">Do The Thing</button><br />
+			<ul id="the-list"></ul>
+		</div>
+		<div class="right">
+			<svg id="the-orbits"></svg>
+		</div>
+	</div>
+</body>
+</html>
