@@ -1,0 +1,67 @@
+html,body,* {
+	font-family: sans-serif;
+}
+
+.orbit {
+	fill: none;
+	stroke: gray;
+	stroke-width: 0.5px;
+	stroke-dasharray: 1;
+}
+.planet {
+	fill: #730517;
+	fill-opacity: 0.75;
+	stroke-width: 1px;
+	stroke: #f44560;
+}
+.planet-label{
+	font-family: Inter;
+	font-weight: 500;
+	font-size: 9px;
+	text-anchor: middle;
+	alignment-baseline: middle;
+	fill: white;
+}
+.container {
+	display: flex;
+	flex-direction: row;
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-top: 10%;
+}
+
+.left {
+	flex-basis: 30%;
+}
+
+.right {
+		display: flex;
+			justify-content: center;
+			/* center horizontally */
+			align-items: center;
+			/* center vertically */
+	flex: 1;
+}
+
+@media (prefers-color-scheme: light) {
+	.orbit {
+		fill: none;
+		stroke: darkgray;
+		stroke-width: 0.5px;
+		stroke-dasharray: 1;
+	}
+	.planet {
+		fill: #88a2bc;
+		fill-opacity: 0.75;
+		stroke-width: 1px;
+		stroke: #4f6a8f;
+	}
+	.planet-label{
+		font-family: Inter;
+		font-weight: 700;
+		font-size: 9px;
+		text-anchor: middle;
+		alignment-baseline: middle;
+		fill: black;
+	}
+}

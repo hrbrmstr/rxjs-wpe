@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="color-scheme" content="dark light">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="styles.css"/>
+	<title>Solar Jumper</title>
+	<script type="module">
+		// Some helpers
+		import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+		import { BehaviorSubject, fromEvent } from 'https://cdn.jsdelivr.net/npm/rxjs@7.8.0/+esm'
+		import { generate_celestial_monikers } from "https://unpkg.com/celestial-moniker-generator/src/index.js"
+		
+		// random number generator helper that will 
+		// let us change up the # of planets
+		// we warp to
+		const randomNumber = d3.randomInt(4, 13)
+		
+		// what we'll call when the user presses the button
+		function updateList(list, planets) {
+			const items = list.selectAll('li')
+			.data(planets);
+			
+			items.enter().append('li')
+			.text(d => d)
+			.merge(items)
+			.text(d => d);
+			
+			items.exit().remove();
+		}
+		
+		// target the list in the DOM
+		const list = d3.select('#the-list');
+		
+		// setup a reaactive button
+		const button = document.querySelector('#the-button');
+		const buttonClickObservable = fromEvent(button, 'click');
+		buttonClickObservable.subscribe(event => {
+			const newPlanetNames = generate_celestial_monikers(randomNumber())
+			planetNamesSubject.next(newPlanetNames);
+		});
+		
+		// setup a reactive data source
+		const planetNamesSubject = new BehaviorSubject([]);
+		const planetNamesObservable = planetNamesSubject.asObservable();
+		planetNamesObservable.subscribe(planets => {
+			updateList(list, planets);
+		});
+		
+		// start the warping!
+		const newPlanetNames = generate_celestial_monikers(randomNumber())
+		planetNamesSubject.next(newPlanetNames)
+		
+	</script>
+</head>
+<body>
+	<div class="container">
+		<div class="left">
+			<button id="the-button">Warp To Another System</button><br />
+			<ul id="the-list"></ul>
+		</div>
+		<div class="right">
+		</div>
+	</div>
+</body>
+</html>
