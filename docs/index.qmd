@@ -70,7 +70,7 @@ planetNamesSubject.next(newPlanetNames)
 
 For this part of the mission, just get it running. You can use [one of the servers we've mentioned in a previous Drop](https://dailyfinds.hrbrmstr.dev/p/drop-145-2022-11-29-http-right-now), just deploy to GH Pages, or use your usual.
 
-## Part 2
+## Part 2: Getting Organized
 
 The second part of your mission is to not be a monster and break apart the JS code from the `index.html` into a structure like this:
 
@@ -87,13 +87,66 @@ I highly suggest attempting this on your own, first. But [there's a pre-built so
 
 Feel empowered to stop here and start playing with your own ideas. The next bit has some D3 in it that you aren't writing, but you have to look at, and that causes some cognitive overload in some folks.
 
-## Part 3
+## Part 3: Adding Another Component
 
 This builds on part two, so "everything in a separate, organized files".
 
 ![](screenshot.png)
 
+See [how it works live](https://rud.is/rxjs-wpe/).
 
+You're going to add an actual solar system plot as you jump from system to system. _All the code for that is in [planets.js](https://github.com/hrbrmstr/rxjs-wpe/blob/batman/extras/planets.js)_ which I've kept a copy of outside the [finished solution directory](https://github.com/hrbrmstr/rxjs-wpe/tree/batman/03-finished-solution).
 
+_You_ need to figure out where to put these puzzle pieces:
 
-Link to [finished solution](https://github.com/hrbrmstr/rxjs-wpe/tree/batman/03-finished-solution).
+_"What is this fancy new import?"_
+
+```js
+import { initializeSystem, updateOrbits } from "./planets.js"
+```
+
+_"I wonder what this is for…"_
+
+```js
+const width = 400, height = 400
+const margin = { top: 50, right: 80, bottom: 50, left: 50 }
+```
+
+_"What is this magicks?"_
+
+```js
+const system = d3.select("#the-orbits")
+	.attr("width", width + margin.left + margin.right)
+	.attr("height", height + margin.top + margin.bottom)
+	.append("g")
+	.attr(
+		"transform", `translate(${width / 2 + margin.left}, ${height / 2 + margin.top})`
+	);
+```
+
+_"You are not helping, hrbrmstr."_
+
+```js
+initializeSystem(system)
+```
+
+_"I know something of your's I'd like to disable, rn, hrbrmstr…"_
+
+```js
+button.disabled = true;
+```
+
+_"Sure, why not?"_
+
+```js
+updateOrbits(system, planets, button);
+```
+
+_"FINALLY A CORNER PIECE! I know where this goes!"_
+```html
+<svg id="the-orbits"></svg>
+```
+
+### FIN
+
+Apologies, once more, for making you bounce around the internets, but hopefully it shows how basic reactivity can be usfeul, and that it's straightforward to add components that enhance the reactive interactivity, even in a simple app. ☮️

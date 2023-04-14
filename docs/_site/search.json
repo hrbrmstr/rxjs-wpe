@@ -32,6 +32,20 @@
     "href": "index.html#part-3",
     "title": "Reactivity With RxJS",
     "section": "Part 3",
-    "text": "Part 3\nThis builds on part two, so “everything in a separate, organized files”.\n\nLink to finished solution."
+    "text": "Part 3\nThis builds on part two, so “everything in a separate, organized files”.\n\nSee how it works live.\nYou’re going to add an actual solar system plot as you jump from system to system. All the code for that is in planets.js which I’ve kept a copy of outside the finished solution directory.\nYou need to figure out where to put these puzzle pieces:\nimport { initializeSystem, updateOrbits } from \"./planets.js\"\nconst width = 400, height = 400\nconst margin = { top: 50, right: 80, bottom: 50, left: 50 }\nconst system = d3.select(\"#the-orbits\")\n    .attr(\"width\", width + margin.left + margin.right)\n    .attr(\"height\", height + margin.top + margin.bottom)\n    .append(\"g\")\n    .attr(\n        \"transform\", `translate(${width / 2 + margin.left}, ${height / 2 + margin.top})`\n    );\ninitializeSystem(system)\nbutton.disabled = true;\nupdateOrbits(system, planets, button);\n&lt;svg id=\"the-orbits\"&gt;&lt;/svg&gt;"
+  },
+  {
+    "objectID": "index.html#part-3-adding-another-component",
+    "href": "index.html#part-3-adding-another-component",
+    "title": "Reactivity With RxJS",
+    "section": "Part 3: Adding Another Component",
+    "text": "Part 3: Adding Another Component\nThis builds on part two, so “everything in a separate, organized files”.\n\nSee how it works live.\nYou’re going to add an actual solar system plot as you jump from system to system. All the code for that is in planets.js which I’ve kept a copy of outside the finished solution directory.\nYou need to figure out where to put these puzzle pieces:\n“What is this fancy new import?”\nimport { initializeSystem, updateOrbits } from \"./planets.js\"\n“I wonder what this is for…”\nconst width = 400, height = 400\nconst margin = { top: 50, right: 80, bottom: 50, left: 50 }\n“What is this magicks?”\nconst system = d3.select(\"#the-orbits\")\n    .attr(\"width\", width + margin.left + margin.right)\n    .attr(\"height\", height + margin.top + margin.bottom)\n    .append(\"g\")\n    .attr(\n        \"transform\", `translate(${width / 2 + margin.left}, ${height / 2 + margin.top})`\n    );\n“You are not helping, hrbrmstr.”\ninitializeSystem(system)\n“I know something of your’s I’d like to disable, rn, hrbrmstr…”\nbutton.disabled = true;\n“Sure, why not?”\nupdateOrbits(system, planets, button);\n“FINALLY A CORNER PIECE! I know where this goes!”\n&lt;svg id=\"the-orbits\"&gt;&lt;/svg&gt;\n\nFIN\nApologies, once more, for making you bounce around the internets, but hopefully it shows how basic reactivity can be usfeul, and that it’s straightforward to add components that enhance the reactive interactivity, even in a simple app. ☮️"
+  },
+  {
+    "objectID": "index.html#part-2-getting-organized",
+    "href": "index.html#part-2-getting-organized",
+    "title": "Reactivity With RxJS",
+    "section": "Part 2: Getting Organized",
+    "text": "Part 2: Getting Organized\nThe second part of your mission is to not be a monster and break apart the JS code from the index.html into a structure like this:\n├── index.html\n├── list.js\n├── main.js\n└── styles.css\nThat means figuring out what goes into main.js, what should go in list.js, and adding a script call out to main.js from index.html.\nI highly suggest attempting this on your own, first. But there’s a pre-built solution for you, too.\nFeel empowered to stop here and start playing with your own ideas. The next bit has some D3 in it that you aren’t writing, but you have to look at, and that causes some cognitive overload in some folks."
   }
 ]

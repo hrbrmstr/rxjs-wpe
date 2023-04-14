@@ -142,8 +142,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#part-1-everything-in-one-place" id="toc-part-1-everything-in-one-place" class="nav-link active" data-scroll-target="#part-1-everything-in-one-place">Part 1: Everything In One Place</a></li>
-  <li><a href="#part-2" id="toc-part-2" class="nav-link" data-scroll-target="#part-2">Part 2</a></li>
-  <li><a href="#part-3" id="toc-part-3" class="nav-link" data-scroll-target="#part-3">Part 3</a></li>
+  <li><a href="#part-2-getting-organized" id="toc-part-2-getting-organized" class="nav-link" data-scroll-target="#part-2-getting-organized">Part 2: Getting Organized</a></li>
+  <li><a href="#part-3-adding-another-component" id="toc-part-3-adding-another-component" class="nav-link" data-scroll-target="#part-3-adding-another-component">Part 3: Adding Another Component</a>
+  <ul class="collapse">
+  <li><a href="#fin" id="toc-fin" class="nav-link" data-scroll-target="#fin">FIN</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -209,8 +212,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>planetNamesSubject<span class="op">.</span><span class="fu">next</span>(newPlanetNames)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>For this part of the mission, just get it running. You can use <a href="https://dailyfinds.hrbrmstr.dev/p/drop-145-2022-11-29-http-right-now">one of the servers we’ve mentioned in a previous Drop</a>, just deploy to GH Pages, or use your usual.</p>
 </section>
-<section id="part-2" class="level2">
-<h2 class="anchored" data-anchor-id="part-2">Part 2</h2>
+<section id="part-2-getting-organized" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-getting-organized">Part 2: Getting Organized</h2>
 <p>The second part of your mission is to not be a monster and break apart the JS code from the <code>index.html</code> into a structure like this:</p>
 <pre><code>├── index.html
 ├── list.js
@@ -220,13 +223,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>I highly suggest attempting this on your own, first. But <a href="https://github.com/hrbrmstr/rxjs-wpe/tree/batman/02-get-organized">there’s a pre-built solution for you</a>, too.</p>
 <p>Feel empowered to stop here and start playing with your own ideas. The next bit has some D3 in it that you aren’t writing, but you have to look at, and that causes some cognitive overload in some folks.</p>
 </section>
-<section id="part-3" class="level2">
-<h2 class="anchored" data-anchor-id="part-3">Part 3</h2>
+<section id="part-3-adding-another-component" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-adding-another-component">Part 3: Adding Another Component</h2>
 <p>This builds on part two, so “everything in a separate, organized files”.</p>
 <p><img src="screenshot.png" class="img-fluid"></p>
-<p>Link to <a href="https://github.com/hrbrmstr/rxjs-wpe/tree/batman/03-finished-solution">finished solution</a>.</p>
+<p>See <a href="https://rud.is/rxjs-wpe/">how it works live</a>.</p>
+<p>You’re going to add an actual solar system plot as you jump from system to system. <em>All the code for that is in <a href="https://github.com/hrbrmstr/rxjs-wpe/blob/batman/extras/planets.js">planets.js</a></em> which I’ve kept a copy of outside the <a href="https://github.com/hrbrmstr/rxjs-wpe/tree/batman/03-finished-solution">finished solution directory</a>.</p>
+<p><em>You</em> need to figure out where to put these puzzle pieces:</p>
+<p><em>“What is this fancy new import?”</em></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { initializeSystem<span class="op">,</span> updateOrbits } <span class="im">from</span> <span class="st">"./planets.js"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><em>“I wonder what this is for…”</em></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> width <span class="op">=</span> <span class="dv">400</span><span class="op">,</span> height <span class="op">=</span> <span class="dv">400</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> margin <span class="op">=</span> { <span class="dt">top</span><span class="op">:</span> <span class="dv">50</span><span class="op">,</span> <span class="dt">right</span><span class="op">:</span> <span class="dv">80</span><span class="op">,</span> <span class="dt">bottom</span><span class="op">:</span> <span class="dv">50</span><span class="op">,</span> <span class="dt">left</span><span class="op">:</span> <span class="dv">50</span> }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><em>“What is this magicks?”</em></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> system <span class="op">=</span> d3<span class="op">.</span><span class="fu">select</span>(<span class="st">"#the-orbits"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">"width"</span><span class="op">,</span> width <span class="op">+</span> margin<span class="op">.</span><span class="at">left</span> <span class="op">+</span> margin<span class="op">.</span><span class="at">right</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">"height"</span><span class="op">,</span> height <span class="op">+</span> margin<span class="op">.</span><span class="at">top</span> <span class="op">+</span> margin<span class="op">.</span><span class="at">bottom</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">append</span>(<span class="st">"g"</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"transform"</span><span class="op">,</span> <span class="vs">`translate(</span><span class="sc">${</span>width <span class="op">/</span> <span class="dv">2</span> <span class="op">+</span> margin<span class="op">.</span><span class="at">left</span><span class="sc">}</span><span class="vs">, </span><span class="sc">${</span>height <span class="op">/</span> <span class="dv">2</span> <span class="op">+</span> margin<span class="op">.</span><span class="at">top</span><span class="sc">}</span><span class="vs">)`</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><em>“You are not helping, hrbrmstr.”</em></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">initializeSystem</span>(system)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><em>“I know something of your’s I’d like to disable, rn, hrbrmstr…”</em></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>button<span class="op">.</span><span class="at">disabled</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><em>“Sure, why not?”</em></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">updateOrbits</span>(system<span class="op">,</span> planets<span class="op">,</span> button)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><em>“FINALLY A CORNER PIECE! I know where this goes!”</em></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;svg</span> <span class="er">id</span><span class="ot">=</span><span class="st">"the-orbits"</span><span class="kw">&gt;&lt;/svg&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="fin" class="level3">
+<h3 class="anchored" data-anchor-id="fin">FIN</h3>
+<p>Apologies, once more, for making you bounce around the internets, but hopefully it shows how basic reactivity can be usfeul, and that it’s straightforward to add components that enhance the reactive interactivity, even in a simple app. ☮️</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
