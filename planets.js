@@ -6,7 +6,6 @@ const planetRadius = 6
 const width = 400, height = 400
 const margin = { top: 50, right: 50, bottom: 50, left: 50 }
 
-
 export function initializeSystem(system) {
 
 	const orbitRings = system
@@ -72,7 +71,7 @@ export function generateOrbits(planets, radii = null) {
 	return orbits;
 }
 
-export function updateOrbits(system, planets) {
+export function updateOrbits(system, planets, button) {
 
 	const newOrbits = generateOrbits(planets)
 
@@ -91,7 +90,10 @@ export function updateOrbits(system, planets) {
 		.range([ -height / 2, height / 2 ]);
 
 	const sharedTransition = d3.transition()
-		.duration(1000);
+		.duration(1000)
+		.on('end', () => {
+			button.disabled = false
+		})
 
 	// Update orbitRings
 	const orbitUpdate = system.selectAll("circle.orbit")
@@ -161,6 +163,6 @@ export function updateOrbits(system, planets) {
 		.delay(1000) // Adjust this value to match the transition duration
 		.attr("x", (d) => scaleX(d.x))
 		.attr("y", (d) => scaleY(d.y))
-		.attr("visibility", showLabels ? "visible" : "hidden");
+		.attr("visibility", showLabels ? "visible" : "hidden")
 
 }
