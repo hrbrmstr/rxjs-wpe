@@ -5,5 +5,26 @@
     "title": "About",
     "section": "",
     "text": "The companion to the Drop."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Reactivity With RxJS",
+    "section": "",
+    "text": "Head over here to see the code.\nHead over here to see it in action.\nIt’s a simple button and list of planets that gets randomly generated thanks to this NPM library.\nAll of the HTML and JS is on one page to make it easier to grok in an editor, and this is the core functionality:\nA random number generator for the # of planets in the list:\nconst randomNumber = d3.randomInt(4, 13)\nThe function we call when the button is pressed:\nfunction updateList(list, planets) {\n    const items = list.selectAll('li')\n    .data(planets);\n    \n    items.enter().append('li')\n    .text(d =&gt; d)\n    .merge(items)\n    .text(d =&gt; d);\n    \n    items.exit().remove();\n}\n\n\nconst list = d3.select('#the-list');\nThe first reactive component: a button that, when pressed, will update a javascript string array with new names:\n// setup a reaactive button\nconst button = document.querySelector('#the-button');\nconst buttonClickObservable = fromEvent(button, 'click');\nbuttonClickObservable.subscribe(event =&gt; {\n    const newPlanetNames = generate_celestial_monikers(randomNumber())\n    planetNamesSubject.next(newPlanetNames);\n});\nThe second reactive component: an actual reactive data source, just like you’d make in Observable, that will update the list of planets once it receives new data:\nconst planetNamesSubject = new BehaviorSubject([]);\nconst planetNamesObservable = planetNamesSubject.asObservable();\nplanetNamesObservable.subscribe(planets =&gt; {\n    updateList(list, planets);\n});\nThe bit that kickstarts the warping:\nconst newPlanetNames = generate_celestial_monikers(randomNumber())\nplanetNamesSubject.next(newPlanetNames)\nFor this part of the mission, just get it running. You can use one of the servers we’ve mentioned in a previous Drop, just deploy to GH Pages, or use your usual."
+  },
+  {
+    "objectID": "index.html#part-1-everything-in-one-place",
+    "href": "index.html#part-1-everything-in-one-place",
+    "title": "Reactivity With RxJS",
+    "section": "",
+    "text": "Head over here to see the code.\nHead over here to see it in action.\nIt’s a simple button and list of planets that gets randomly generated thanks to this NPM library.\nAll of the HTML and JS is on one page to make it easier to grok in an editor, and this is the core functionality:\nA random number generator for the # of planets in the list:\nconst randomNumber = d3.randomInt(4, 13)\nThe function we call when the button is pressed:\nfunction updateList(list, planets) {\n    const items = list.selectAll('li')\n    .data(planets);\n    \n    items.enter().append('li')\n    .text(d =&gt; d)\n    .merge(items)\n    .text(d =&gt; d);\n    \n    items.exit().remove();\n}\n\n\nconst list = d3.select('#the-list');\nThe first reactive component: a button that, when pressed, will update a javascript string array with new names:\n// setup a reaactive button\nconst button = document.querySelector('#the-button');\nconst buttonClickObservable = fromEvent(button, 'click');\nbuttonClickObservable.subscribe(event =&gt; {\n    const newPlanetNames = generate_celestial_monikers(randomNumber())\n    planetNamesSubject.next(newPlanetNames);\n});\nThe second reactive component: an actual reactive data source, just like you’d make in Observable, that will update the list of planets once it receives new data:\nconst planetNamesSubject = new BehaviorSubject([]);\nconst planetNamesObservable = planetNamesSubject.asObservable();\nplanetNamesObservable.subscribe(planets =&gt; {\n    updateList(list, planets);\n});\nThe bit that kickstarts the warping:\nconst newPlanetNames = generate_celestial_monikers(randomNumber())\nplanetNamesSubject.next(newPlanetNames)\nFor this part of the mission, just get it running. You can use one of the servers we’ve mentioned in a previous Drop, just deploy to GH Pages, or use your usual."
+  },
+  {
+    "objectID": "index.html#part-2",
+    "href": "index.html#part-2",
+    "title": "Reactivity With RxJS",
+    "section": "Part 2",
+    "text": "Part 2"
   }
 ]

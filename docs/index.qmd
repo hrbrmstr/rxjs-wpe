@@ -1,10 +1,73 @@
 ---
 title: "Reactivity With RxJS"
 output: "docs"
-theme:
-  light: flatly
-  dark: darkly
+
 ---
 
 ## Part 1: Everything In One Place
 
+Head [over here](https://github.com/hrbrmstr/rxjs-wpe/tree/batman/01-simple-reactivity) to see the code.
+
+Head [over here]() to see it in action.
+
+It's a simple button and list of planets that gets randomly generated thanks to [this NPM library](https://www.npmjs.com/package/celestial-moniker-generator).
+
+All of the HTML and JS is on one page to make it easier to grok in an editor, and this is the core functionality:
+
+A random number generator for the # of planets in the list:
+
+```js
+const randomNumber = d3.randomInt(4, 13)
+```
+
+The function we call when the button is pressed:
+
+```js
+function updateList(list, planets) {
+	const items = list.selectAll('li')
+	.data(planets);
+	
+	items.enter().append('li')
+	.text(d => d)
+	.merge(items)
+	.text(d => d);
+	
+	items.exit().remove();
+}
+
+
+const list = d3.select('#the-list');
+```
+
+The first reactive component: a button that, when pressed, will update a javascript string array with new names:
+
+```js
+// setup a reaactive button
+const button = document.querySelector('#the-button');
+const buttonClickObservable = fromEvent(button, 'click');
+buttonClickObservable.subscribe(event => {
+	const newPlanetNames = generate_celestial_monikers(randomNumber())
+	planetNamesSubject.next(newPlanetNames);
+});
+```
+
+The second reactive component: an actual reactive data source, just like you'd make in Observable, that will update the list of planets once it receives new data:
+
+```js
+const planetNamesSubject = new BehaviorSubject([]);
+const planetNamesObservable = planetNamesSubject.asObservable();
+planetNamesObservable.subscribe(planets => {
+	updateList(list, planets);
+});
+```
+
+The bit that kickstarts the warping:
+
+```js
+const newPlanetNames = generate_celestial_monikers(randomNumber())
+planetNamesSubject.next(newPlanetNames)
+```
+
+For this part of the mission, just get it running. You can use [one of the servers we've mentioned in a previous Drop](https://dailyfinds.hrbrmstr.dev/p/drop-145-2022-11-29-http-right-now), just deploy to GH Pages, or use your usual.
+
+## Part 2
