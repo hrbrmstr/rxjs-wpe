@@ -10,4 +10,4 @@ You're going to see a small RxJS app that warps you to a new solar system after 
 
 YOU DO NOT NEED A BUILD SYSTEM. Just a web server, which we provide links to in the workbook.
 
-I'm warping you once more [to the GH Pages doc](https://rud.is/rxjs-wpe/docs/) for this to explain more, since there are too many limits to the GH READMEs.
+I'm warping you once more [to the 'splainer](https://rud.is/rxjs-wpe/docs/) for this to explain more, since there are too many limits to the GH READMEs.
